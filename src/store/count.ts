@@ -1,15 +1,30 @@
-import { create } from 'zustand';
+import { create } from 'zustand'
 
-export const useCountStore = create<{
-    count: number;
-    actions: {
-        increase: () => void;
-        decrease: () => void;
-    }
-}>(set => ({
-    count: 0,
-    actions: {
-        increase: () => set(state => ({ count: state.count + 1 })),
-        decrease: () => set(state => ({ count: state.count - 1 }))
-    }
+interface State {
+  count: number
+  double: number
+  min: number
+  max: number
+}
+interface Actions {
+  actions: {
+    increase: () => void
+    decrease: () => void
+    resetState: () => void
+  }
+}
+
+const initialState: State = {
+  count: 1,
+  double: 2,
+  min: 0,
+  max: 99
+}
+export const useCountStore = create<State & Actions>(set => ({
+  ...initialState,
+  actions: {
+    increase: () => set(state => ({ count: state.count + 1 })),
+    decrease: () => set(state => ({ count: state.count - 1 })),
+    resetState: () => set(initialState)
+  }
 }))
