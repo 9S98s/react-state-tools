@@ -6,6 +6,7 @@ interface State {
   min: number
   max: number
 }
+
 interface Actions {
   actions: {
     increase: () => void
@@ -20,6 +21,7 @@ const initialState: State = {
   min: 0,
   max: 99
 }
+
 export const useCountStore = create<State & Actions>(set => ({
   ...initialState,
   actions: {
